@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  aguacwb:
+    container_name: aguacwb
+    build: '.'
+    restart: 'no'
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    networks:
+      - app-connect
+
+volumes:
+  viacep-postgres-data:
+
+networks:
+  app-connect:
+    driver: bridge
