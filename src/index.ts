@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import axios from "axios";
 import { getWaterRestrictionData, waterRestrictionType, waterRestrictionTypeResponse } from "./Sanepar/main";
 import { getText } from "./utils";
@@ -16,7 +17,7 @@ const main = async () => {
     let waterRestrictionData: waterRestrictionTypeResponse[];
     while (triesCount <= retryNumber) {
       waterRestrictionData = await getWaterRestrictionData(
-        'Coronel Dulcidio 1179'
+        process.env.ADDRESS
       );
       if (waterRestrictionData[0].attributes !== undefined) {
         console.log(`${now}: Got water data. ${JSON.stringify(waterRestrictionData)}`);
@@ -62,7 +63,7 @@ const main = async () => {
     };
 
     console.log(`${now}: Sending message. ${text}`);
-    //axios.post(url, params);
+    axios.post(url, params);
   } catch (e) {
     console.error(`${now}: ERROR! ${e}`);
   }

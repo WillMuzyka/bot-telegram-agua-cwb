@@ -53,10 +53,6 @@ const textList = ({ type, refDate }: TextListProps) => {
 }
 
 const getDates = (data: waterRestrictionType[]): Dates => {
-  // const startDate = data[0].attributes.INICIO;
-  // const endDate = data[0].attributes.NORMALIZACAO;
-  // const nextStartDate = data[1].attributes.INICIO;
-  // const nextEndDate = data[1].attributes.NORMALIZACAO;
   const today = new Date();
   let datesObj = {
     startDate: null,
@@ -87,14 +83,10 @@ const getDates = (data: waterRestrictionType[]): Dates => {
 
   const beforeStartDate = new Date(datesObj.startDate);
   beforeStartDate.setDate(datesObj.startDate.getDate() - 1);
-  // const beforeNextStartDate = new Date(nextStartDate);
-  // beforeNextStartDate.setDate(nextStartDate.getDate() - 1);
 
-  // const timeWithWater = nextStartDate.getDate() - endDate.getDate();
   const previousEndDate = new Date(datesObj.startDate);
   previousEndDate.setDate(datesObj.startDate.getDate() - datesObj.timeWithWater);
 
-  // These 4 lines can be commented if the first 4 lines of this functions are uncommented
   if (datesObj.nextEndDate === null) {
     datesObj.nextStartDate = new Date(datesObj.startDate);
     datesObj.nextStartDate.setDate(datesObj.endDate.getDate() + datesObj.timeWithWater);
@@ -154,17 +146,17 @@ const getTypeDay = (dates: Dates): TextListProps => {
 export const getText = (data: waterRestrictionType[]) => {
   const dates = getDates(data);
   const typeDay = getTypeDay(dates);
-  console.log(dates);
-  for (let n = 0; n < 8; n++) {
-    const nextToday = dates.today.getDate() + n;
-    const today = new Date();
-    today.setDate(nextToday)
-    const typeDayTest = getTypeDay({
-      ...dates,
-      today
-    });
-    console.log(today, textList(typeDayTest));
-  }
+  // console.log(dates);
+  // for (let n = 0; n < 8; n++) {
+  //   const nextToday = dates.today.getDate() + n;
+  //   const today = new Date();
+  //   today.setDate(nextToday)
+  //   const typeDayTest = getTypeDay({
+  //     ...dates,
+  //     today
+  //   });
+  //   console.log(today, textList(typeDayTest));
+  // }
 
   return textList(typeDay);
 }
